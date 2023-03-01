@@ -32,7 +32,7 @@ const GameBody = () => {
                 {statusStart ? (
                     <div className="list-type5">
                         <ol >
-                            <li onClick={()=>optionMode("Easy",3)}><a href="#">Easy</a></li>
+                            <li onClick={()=>optionMode("Easy",10)}><a href="#">Easy</a></li>
                             <li onClick={()=>optionMode("Medium",20)}><a href="#">Medium</a></li>
                             <li onClick={()=>optionMode("Hard",30)}><a href="#">Hard</a></li>
                         </ol>
