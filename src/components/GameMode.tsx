@@ -28,6 +28,7 @@ const GameMode = (props:Props) => {
     const [activeCard,setActiveCard] = useState<number[]>([])
     const [removeCard,setRemoveCard] = useState<number[]>([])
     const [winGame,setWinGame] = useState<boolean>(false)
+    const [countCard,setCountCard] = useState<number>(0)
     useEffect(()=>{
         const getCard = async()=>{
             const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${gameStart.level}&offset=0`)
@@ -61,6 +62,11 @@ const GameMode = (props:Props) => {
             level:0
         })
     }
+    useEffect(()=>{
+        if(countCard===gameStart.level){
+            setWinGame(true)
+        }
+    },[countCard])
   return (
     <div>
         <div className='container-card'>
@@ -83,10 +89,11 @@ const GameMode = (props:Props) => {
                                         image={list.sprites.front_default}
                                         active={index}
                                         listCard={listCard}
-                                        endGame={gameStart.level}
                                         removeCard={removeCard}
                                         setRemoveCard={setRemoveCard}
                                         setWinGame={setWinGame}
+                                        setCountCard={setCountCard}
+                                        countCard={countCard}
                                     />
                                 </div>
                             )

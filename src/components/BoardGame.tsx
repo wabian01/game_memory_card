@@ -9,15 +9,16 @@ interface Props{
     setActiveCard: React.Dispatch<React.SetStateAction<number[]>>;
     active:number;
     listCard: ListCard[];
-    endGame:number;
     removeCard:number[];
     setRemoveCard:React.Dispatch<React.SetStateAction<number[]>>;
-    setWinGame:React.Dispatch<React.SetStateAction<boolean>>
+    setWinGame:React.Dispatch<React.SetStateAction<boolean>>;
+    setCountCard:React.Dispatch<React.SetStateAction<number>>;
+    countCard:number;
 }
 
 const BoardGame = (props:Props) => {
-    const {id,name,image,activeCard,setActiveCard,active,listCard,endGame,removeCard,setRemoveCard,setWinGame} = props
-    const [countCard,setCountCard] = useState<number>(0)
+    const {id,name,image,activeCard,setActiveCard,active,listCard,removeCard,setRemoveCard,setWinGame,setCountCard,countCard} = props
+    
     const setActive=(index:number)=>{
         if(activeCard.includes(index) || removeCard.includes(index)){
             return
@@ -27,15 +28,12 @@ const BoardGame = (props:Props) => {
             setActiveCard(active)
             if(active.length===2){
                 if(listCard[active[0]].id === listCard[active[1]].id){
-                    let temp= countCard + 1
-                    
+                    let temp = countCard + 1
+                    setCountCard(temp)
                     let remove_tem = removeCard.concat(active)
                     setRemoveCard(remove_tem)
                     setTimeout(() => {
                         setActiveCard([])
-                        if(temp===endGame){
-                            setWinGame(true)
-                        }
                     }, 500)
                 }else{
                     setTimeout(() => {
